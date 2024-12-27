@@ -65,5 +65,6 @@ internal class Program
             */
         }
         Lab4b();
+
     }
 }
