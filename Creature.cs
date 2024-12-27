@@ -6,70 +6,41 @@ using System.Threading.Tasks;
 
 namespace Simulator;
 
-internal class Creature
+public abstract class Creature
 {
-    //Pola prywatne
-    private string _name = "Unknown";
+    //Pola Prywatne
+    private string _name = "Unknown"; //konwencja nazywania pól prywatnych _camelCase
     private int _level;
 
-    //Właściwości automatyczne + settery/gettery
-    public string Name 
-    { 
-        get 
-        {  
-            return _name; 
+    //Właściwości + gettery/settery
+    public abstract int Power {  get; }
+    public abstract string Info { get; }
+
+    public string Name
+    {
+        get
+        {
+            return _name;
         }
         init
         {
-            string validatedName = value.Trim(); //usunięcie białych znaków z początku i końca
-            if (validatedName == "" || validatedName == null ) //warunek jeżeli z nazwy został pusty string/null
-            {
-                _name = "Unknown";
-            }
-            else
-            {
-                if (validatedName.Length < 3)
-                {
-                    validatedName = validatedName.PadRight(3, '#');
-                }
-                else if (validatedName.Length > 25) 
-                {
-                    validatedName = validatedName.Substring(0, 25).TrimEnd();
-                    if (validatedName.Length < 3) validatedName.PadRight(3, '#');
-                }
-                if (char.IsLower(validatedName[0]))
-                {
-                    validatedName = char.ToUpper(validatedName[0]) + validatedName.Substring(1);
-                }
-                _name = validatedName;
-            }
-        } 
+            _name = Validator.Shortener(value, 3, 25, '#');
+        }
     }
-    public int Level 
-    { 
+    public int Level
+    {
         get
         {
             return _level;
         }
         init
         {
-            if (value < 1)
-            {
-                _level = 1;
-            }
-            else if (value > 10)
-            {
-                _level = 10;
-            }
-            else
-            {
-                _level = value;
-            }
+            _level = Validator.Limiter(value, 1, 10);
         }
     }
 
-    //Konstruktor z parametrami
-    public Creature(string name,int level = 1)
+    //Konstruktor parametryczny
+    public Creature(string name, int level = 1)
     {
         Name = name;
         Level = level;
@@ -81,21 +52,41 @@ internal class Creature
         //Nic nie wykonuje
     }
 
-    public void SayHi()
-    {
-        Console.WriteLine($"Hi, I'm {Name}, my level is {Level}");
-    }
-
-    public string Info
-    {
-        get { return $"{Name} [{Level}]"; }
-    }
+    public abstract void SayHi(); //Kod wykomentowany z powodu pojawienia sie metody abstrakcyjnej - for reference only
+    //{
+    //    Console.WriteLine($"Hi, I'm {Name}, my level is {Level}.");
+    //}
 
     public void Upgrade()
     {
-        if (_level<10)
+        if (_level < 10) //Sprawdzenie, że nie ma levelu 10 przed podniesieniem o 1
         {
             _level++;
         }
+    }
+
+    public void Go(Direction direction) //Metoda GO na pojedynczy ruch stwora
+    {
+        string textToSentense = direction.ToString().ToLower(); //konwersja na string i ma małe litery
+        Console.WriteLine($"{Name} goes {textToSentense}.");
+    }
+
+    public void Go(Direction[] directions) //Metoda GO na tablicę ruchów 
+    {
+        foreach (var direction in directions)
+        {
+            Go(direction); //wejsciem jest pojedynczy kierunek
+        }
+    }
+
+    public void Go(string directionInputString) //Metoda GO parsująca string na tabelicę ruchów
+    {
+        Direction[] directions = DirectionParser.Parse(directionInputString);
+        Go(directions); //wejsciem jest tablica kierunków
+    }
+
+    public override string ToString()
+    {
+        return $"{GetType().Name.ToUpper()}: {Name} [{Level}]{Info}";
     }
 }
