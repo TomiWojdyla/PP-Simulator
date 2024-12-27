@@ -32,7 +32,7 @@ public readonly struct Point
                 return new Point(X - 1, Y);
             default:
                 Console.WriteLine("Nie obsluzony kierunek");
-                return this; // Dla teoretycznie blednego kierunku zwracam ten sam punkt
+                return this; // Dla teoretycznie blednego kierunku zwraca ten sam punkt
         }
     }
 
@@ -51,7 +51,7 @@ public readonly struct Point
                 return new Point(X - 1, Y + 1);
             default:
                 Console.WriteLine("Nie obsluzony kierunek");
-                return this; // Dla teoretycznie blednego kierunku zwracam ten sam punkt
+                return this; // Dla teoretycznie blednego kierunku zwraca ten sam punkt
         }
     }
 }
