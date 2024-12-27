@@ -31,7 +31,6 @@ public class Rectangle
         Y1 = Math.Min(y1, y2);
         X2 = Math.Max(x1, x2); 
         Y2 = Math.Max(y1, y2);
-
     }
 
     public Rectangle(Point p1, Point p2) : this(p1.X, p1.Y, p2.X, p2.Y) { } 
