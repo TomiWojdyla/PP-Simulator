@@ -1,4 +1,6 @@
-﻿namespace Simulator;
+﻿using System.Security.Cryptography;
+
+namespace Simulator;
 
 internal class Program
 {
@@ -64,7 +66,15 @@ internal class Program
                 ORC: Morgash [6][4]
             */
         }
-        Lab4b();
+        //Lab4b();
 
+        Point p1 = new Point(5, 5);
+        Point p2 = default;
+
+        p1 = p1.Next(Direction.Up);
+        p1 = p1.Next(Direction.Up);
+        Console.WriteLine(p1);
+        p2 = p2.Next(Direction.Right);
+        Console.WriteLine(p2);
     }
 }
