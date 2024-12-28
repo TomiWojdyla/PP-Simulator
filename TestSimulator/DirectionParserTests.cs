@@ -38,6 +38,20 @@ public class DirectionParserTests
     }
 
     [Fact]
+    public void Parse_ShouldHandleMixCaseLetters()
+    {
+        // Arrange
+        string input = "RuUld";
+        // Act
+        var result = DirectionParser.Parse(input);
+        // Assert
+        Assert.Equal([Direction.Right, Direction.Up,
+            Direction.Up, Direction.Left, Direction.Down],
+            result
+        );
+    }
+
+    [Fact]
     public void Parse_ShouldReturnEmptyArrayForEmptyString()
     {
         // Arrange
