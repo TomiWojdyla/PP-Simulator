@@ -12,7 +12,7 @@ namespace Simulator.Maps;
 public abstract class Map
 {
     /// <summary>
-    /// Check if give point belongs to the map.
+    /// Check if given point belongs to the map.
     /// </summary>
     /// <param name="p">Point to check.</param>
     /// <returns></returns>
