@@ -6,18 +6,14 @@ using System.Threading.Tasks;
 
 namespace Simulator.Maps;
 
-public class SmallTorusMap : Map
+public class SmallTorusMap : SmallMap
 {
     // Właściwości
     public int Size { get; }
 
-    public SmallTorusMap(int size)
+    public SmallTorusMap(int sizeX, int sizeY = 5) : base(sizeX, sizeY)
     {
-        if (size < 5 || size > 20)
-        {
-            throw new ArgumentOutOfRangeException(nameof(size), "For SmallTorusMap size needs to be in the range [5, 20]"); //wyjątek -> wymiar mapy nie pasuje do założeń
-        }
-        Size = size;
+        Size = sizeX;
     }
 
     /// <summary>

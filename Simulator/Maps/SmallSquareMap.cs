@@ -6,19 +6,14 @@ using System.Threading.Tasks;
 
 namespace Simulator.Maps
 {
-    public class SmallSquareMap : Map
+    public class SmallSquareMap : SmallMap
     {
         //Właściwości
         public int Size { get; }
 
-        public SmallSquareMap(int size)
+        public SmallSquareMap(int sizeX, int sizeY = 5) : base(sizeX, sizeY)
         {
-            if (size < 5 || size > 20)
-            {
-                throw new ArgumentOutOfRangeException(nameof(size), "For SmallSquareMap size needs to be in the range [5, 20]"); //wyjątek -> wymiar mapy nie pasuje do założeń
-            }
-            Size = size;
-
+            Size = sizeX;
         }
 
         /// <summary>
@@ -30,7 +25,6 @@ namespace Simulator.Maps
         public override bool Exist(Point p)
         {
             Rectangle tempRectangle = new(new Point(0, 0), new Point(Size-1, Size-1));
-            //Console.WriteLine(tempRectangle.ToString()); // Kontrolny druk rozmiaru prostokąta
             return tempRectangle.Contains(p);
         }
 
