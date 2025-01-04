@@ -11,21 +11,8 @@ public class SmallTorusMap : SmallMap
     // Właściwości
     public int Size { get; }
 
-    public SmallTorusMap(int sizeX, int sizeY = 5) : base(sizeX, sizeY)
+    public SmallTorusMap(int size) : base(size, size)
     {
-        Size = sizeX;
-    }
-
-    /// <summary>
-    /// Check if given point belongs to the map.
-    /// Map contains points from (0,0) to (Size-1, Size-1). Coordinates that equals 'Size' are outside the map!
-    /// </summary>
-    /// <param name="p">Point to check.</param>
-    /// <returns>Bool: True/False</returns>
-    public override bool Exist(Point p)
-    {
-        Rectangle tempRectangle = new(new Point(0, 0), new Point(Size - 1, Size - 1));
-        return tempRectangle.Contains(p);
     }
 
     /// <summary>
@@ -84,5 +71,18 @@ public class SmallTorusMap : SmallMap
                     return p;
             }
         }
+    }
+
+    private Point ToTorus(Point point)
+    {
+        var x = point.X;
+        while (x >= Size) x -= Size;
+        while (x <= 0) x += Size;
+
+        var y = point.Y;
+        while (y >= Size) y -= Size;
+        while (y <= 0) y += Size;
+
+        return new Point(x, y);
     }
 }

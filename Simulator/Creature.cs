@@ -3,11 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Simulator.Maps;
 
 namespace Simulator;
 
 public abstract class Creature
 {
+    public Map? Map { get; set; }  
+    
+    public Point Position { get; set; }
+
+    public void InitMapAndPosition(Map map, Point position, bool requestFromMap = false)
+    {
+            Map = map;
+            Position = position; //dodac warunek czy punkt jest na mapie?
+        if (requestFromMap == false)
+        {
+            Map.Add(this, Position);
+        }
+            Console.WriteLine($"InitMapANd POsition: Dodalem stwora na mapie {map} w punkcie {position}");
+    }
+
+    public void RemoveFromMap()
+    {
+        Map = null;
+    }
+    
     //Pola Prywatne
     private string _name = "Unknown"; //konwencja nazywania pól prywatnych _camelCase
     private int _level;
@@ -67,6 +88,10 @@ public abstract class Creature
 
     public string Go(Direction direction) //Metoda GO na pojedynczy ruch stwora
     {
+        if (Map != null)
+        {
+            Map.Move(this, Position, Map.Next(Position, direction));
+        }
         return $"{direction.ToString().ToLower()}"; //konwersja na string i ma małe litery
     }
 

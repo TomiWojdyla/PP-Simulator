@@ -51,9 +51,9 @@ namespace Simulator.TestLabArchive
             {
                 SmallSquareMap smallMap3 = new(7); //no exception
                 Console.WriteLine($"Small map3 created. Size {smallMap3.Size}.");
-                Console.WriteLine($"Test Point 1 exist in the map3? {smallMap3.ExistAlternative(testPoint1)}.");
-                Console.WriteLine($"Test Point (-1,2) exist in the map3? {smallMap3.ExistAlternative(new Point(-1, 2))}.");
-                Console.WriteLine($"Test Point (7,6) exist in the map3? {smallMap3.ExistAlternative(new Point(7, 6))}.");
+                //Console.WriteLine($"Test Point 1 exist in the map3? {smallMap3.ExistAlternative(testPoint1)}.");
+                //Console.WriteLine($"Test Point (-1,2) exist in the map3? {smallMap3.ExistAlternative(new Point(-1, 2))}.");
+                //Console.WriteLine($"Test Point (7,6) exist in the map3? {smallMap3.ExistAlternative(new Point(7, 6))}.");
 
                 SmallSquareMap smallMap4 = new(4); //exception expected -> too small
             }

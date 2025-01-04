@@ -12,8 +12,17 @@ namespace Simulator.Maps;
 /// </summary>
 public abstract class Map
 {
+    /// <summary>
+    /// Horizontal map size.
+    /// </summary>
     public int SizeX { get; init; }
+
+    /// <summary>
+    /// Vertical map size.
+    /// </summary>
     public int SizeY { get; init; }
+
+    private readonly Rectangle _map;
 
     public Map(int sizeX, int sizeY)
     {
@@ -27,6 +36,7 @@ public abstract class Map
         }
         SizeX = sizeX;
         SizeY = sizeY;
+        _map = new Rectangle(0, 0, SizeX - 1, SizeY - 1);
     }
 
     /// <summary>
@@ -34,7 +44,10 @@ public abstract class Map
     /// </summary>
     /// <param name="p">Point to check.</param>
     /// <returns></returns>
-    public abstract bool Exist(Point p);
+    public bool Exist(Point p)
+    {
+        return _map.Contains(p);
+    }
 
     /// <summary>
     /// Next position to the point in a given direction.
@@ -52,4 +65,21 @@ public abstract class Map
     /// <param name="d">Direction.</param>
     /// <returns>Next point.</returns>
     public abstract Point NextDiagonal(Point p, Direction d);
+
+    public abstract void Add(Creature creature, Point point);
+
+
+    public abstract void Remove(Creature creature, Point point);
+ 
+
+    public string Move(Creature creature, Point startPoint, Point endPoint)
+    {
+        Remove(creature, startPoint); //jezeli stwora nie ma w tym punkcie wystopowac Adda
+        Add(creature, endPoint);
+        return $"Przesunalem {creature} stad {startPoint} tutaj {endPoint}";
+    }
+
+    public abstract string At(int x, int y); 
+
+    public abstract string At(Point point);
 }

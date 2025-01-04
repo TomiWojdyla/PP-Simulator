@@ -1,4 +1,5 @@
-﻿using Simulator;
+﻿using System;
+using Simulator;
 using Simulator.Maps;
 
 namespace Runner;
@@ -8,40 +9,26 @@ internal class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Starting Simulator!\n");
-        Lab3b();
 
-    }
+        var a = new Elf("Elandor", 7, 8);
+        var TestowaMapa = new SmallSquareMap(5);
+        var TestowyPunkt = new Point(1, 1);
+        a.InitMapAndPosition(TestowaMapa, TestowyPunkt);
+        var InnyTestowyPunkt = new Point (2, 2);
+        var o = new Orc("Shrek", 7, 8);
+        var g = new Orc("Goblin", 1, 1);
+        TestowaMapa.Add(o, InnyTestowyPunkt);
+        TestowaMapa.Add(g, InnyTestowyPunkt);
+        Console.WriteLine(TestowaMapa.At(2, 2));
+        Console.WriteLine(TestowaMapa.At(TestowyPunkt));
+        TestowaMapa.Remove(a, TestowyPunkt);
+        Console.WriteLine(TestowaMapa.At(TestowyPunkt));
+        o.Go(Direction.Right);
+        var InnyTestowyPunkt2 = new Point(3, 2);
+        Console.WriteLine(TestowaMapa.At(2, 2));
+        Console.WriteLine(TestowaMapa.At(InnyTestowyPunkt2));
 
-    public static void Lab3b()
-    {
-        Elf c = new("Shrek", 7);
-        Console.WriteLine(c.Greeting());
 
-        Console.WriteLine("\n* Up");
-        Console.WriteLine(c.Go(Direction.Up));
 
-        Console.WriteLine("\n* Right, Left, Left, Down");
-        Direction[] directions = {
-        Direction.Right, Direction.Left, Direction.Left, Direction.Down
-        };
-        string[] goTable = c.Go(directions);
-        foreach (string go in goTable)
-        {
-            Console.WriteLine(go);
-        }
-
-        Console.WriteLine("\n* LRL");
-        string[] goTable2 = c.Go("LRL");
-        foreach (string go in goTable2)
-        {
-            Console.WriteLine(go);
-        }
-
-        Console.WriteLine("\n* xxxdR lyyLTyu");
-        string[] goTable3 = c.Go("xxxdR lyyLTyu");
-        foreach (string go in goTable3)
-        {
-            Console.WriteLine(go);
-        }
     }
 }

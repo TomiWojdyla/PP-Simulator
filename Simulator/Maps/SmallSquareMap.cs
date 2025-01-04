@@ -11,32 +11,8 @@ namespace Simulator.Maps
         //Właściwości
         public int Size { get; }
 
-        public SmallSquareMap(int sizeX, int sizeY = 5) : base(sizeX, sizeY)
+        public SmallSquareMap(int size) : base(size, size)
         {
-            Size = sizeX;
-        }
-
-        /// <summary>
-        /// Check if given point belongs to the map.
-        /// Map contains points from (0,0) to (Size-1, Size-1). Coordinates that equals 'Size' are outside the map!
-        /// </summary>
-        /// <param name="p">Point to check.</param>
-        /// <returns>Bool: True/False</returns>
-        public override bool Exist(Point p)
-        {
-            Rectangle tempRectangle = new(new Point(0, 0), new Point(Size-1, Size-1));
-            return tempRectangle.Contains(p);
-        }
-
-        /// <summary>
-        /// Check if given point belongs to the map.
-        /// Map contains points from (0,0) to (Size-1, Size-1). Coordinates that equals 'Size' are outside the map!
-        /// </summary>
-        /// <param name="p">Point to check.</param>
-        /// <returns>Bool: True/False</returns>
-        public bool ExistAlternative(Point p) // No override -> this method not existed in class Map -> w zasadzie jest zbędna ale stworzona jako pierwsza ;) 
-        {
-            return 0 <= p.X && p.X <= Size - 1 && 0 < p.Y && p.Y <= Size - 1; // This one doesn't use Rectangle class
         }
 
         /// <summary>
