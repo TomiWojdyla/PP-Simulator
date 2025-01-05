@@ -9,9 +9,11 @@ namespace Simulator.Maps;
 public class SmallTorusMap : SmallMap
 {
     // Właściwości
-    public int Size { get; }
+    public int SizeX { get; }
 
-    public SmallTorusMap(int size) : base(size, size)
+    public int SizeY { get; }
+
+    public SmallTorusMap(int sizeX, int sizeY) : base(sizeX, sizeY)
     {
     }
 
@@ -38,9 +40,9 @@ public class SmallTorusMap : SmallMap
                 case Direction.Right:
                     return new Point(0, p.Y);
                 case Direction.Down:
-                    return new Point(p.X, Size - 1);
+                    return new Point(p.X, SizeY - 1);
                 case Direction.Left:
-                    return new Point(Size - 1, p.Y);    
+                    return new Point(SizeX - 1, p.Y);    
                 default:
                     return p;
             }
@@ -60,29 +62,29 @@ public class SmallTorusMap : SmallMap
             switch (d)
             {
                 case Direction.Up:
-                    return new Point((p.X + 1) % Size, (p.Y + 1) % Size); // operator modulo 
+                    return new Point((p.X + 1) % SizeY, (p.Y + 1) % SizeY); // operator modulo 
                 case Direction.Right:
-                    return new Point((p.X + 1) % Size, (p.Y - 1 + Size) % Size); // + Size aby uniknąć liczb ujemnych. Dla 'modulo' nic sie nie zmienia
+                    return new Point((p.X + 1) % SizeX, (p.Y - 1 + SizeX) % SizeX); // + Size aby uniknąć liczb ujemnych. Dla 'modulo' nic sie nie zmienia
                 case Direction.Down:
-                    return new Point((p.X - 1 + Size) % Size, (p.Y - 1 + Size) % Size);
+                    return new Point((p.X - 1 + SizeY) % SizeY, (p.Y - 1 + SizeY) % SizeY);
                 case Direction.Left:
-                    return new Point((p.X - 1 + Size) % Size, (p.Y + 1) % Size);
+                    return new Point((p.X - 1 + SizeX) % SizeX, (p.Y + 1) % SizeX);
                 default:
                     return p;
             }
         }
     }
 
-    private Point ToTorus(Point point)
-    {
-        var x = point.X;
-        while (x >= Size) x -= Size;
-        while (x <= 0) x += Size;
+    //private Point ToTorus(Point point)
+    //{
+    //    var x = point.X;
+    //    while (x >= SizeX) x -= SizeX;
+    //    while (x <= 0) x += SizeX;
 
-        var y = point.Y;
-        while (y >= Size) y -= Size;
-        while (y <= 0) y += Size;
+    //    var y = point.Y;
+    //    while (y >= SizeY) y -= SizeY;
+    //    while (y <= 0) y += SizeY;
 
-        return new Point(x, y);
-    }
+    //    return new Point(x, y);
+    //}
 }

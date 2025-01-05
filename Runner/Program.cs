@@ -28,22 +28,24 @@ internal class Program
         //Console.WriteLine(TestowaMapa.At(2, 2));
         //Console.WriteLine(TestowaMapa.At(InnyTestowyPunkt2));
 
-        SmallSquareMap map = new(5);
-        List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor")];
-        List<Point> points = [new(2, 2), new(3, 1)];
-        string moves = "dlrludl";
 
-        Simulation simulation = new(map, creatures, points, moves);
-        Console.WriteLine(map.At(2, 2));
-        Console.WriteLine(map.At(3, 1));
-        simulation.Turn();
-        Console.WriteLine(map.At(2, 2));
-        Console.WriteLine(map.At(2, 1));
-        Console.WriteLine(map.At(3, 1));
-        simulation.Turn();
-        Console.WriteLine(map.At(2, 1));
-        Console.WriteLine(map.At(3, 1));
-        Console.WriteLine(map.At(2, 1));
+
+        //SmallSquareMap map = new(5);
+        //List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor")];
+        //List<Point> points = [new(2, 2), new(3, 1)];
+        //string moves = "dlrludl";
+
+        //Simulation simulation = new(map, creatures, points, moves);
+        //Console.WriteLine(map.At(2, 2));
+        //Console.WriteLine(map.At(3, 1));
+        //simulation.Turn();
+        //Console.WriteLine(map.At(2, 2));
+        //Console.WriteLine(map.At(2, 1));
+        //Console.WriteLine(map.At(3, 1));
+        //simulation.Turn();
+        //Console.WriteLine(map.At(2, 1));
+        //Console.WriteLine(map.At(3, 1));
+        //Console.WriteLine(map.At(2, 1));
 
     }
 }

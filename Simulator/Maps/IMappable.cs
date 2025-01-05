@@ -11,6 +11,11 @@ public interface IMappable
 
     char MapSymbol { get; }
 
+    public Map? Map { get; set; }
+
+    public Point Position { get; set; }
+
+
     string Go(Direction direction); 
 
     void InitMapAndPosition(Map map, Point position, bool requestFromMap = false);

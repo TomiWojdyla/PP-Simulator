@@ -67,12 +67,12 @@ public abstract class SmallMap : Map
             var listOfCreaturesInPoint = _fields[point.X, point.Y];
             if (listOfCreaturesInPoint != null && listOfCreaturesInPoint.Count != 0)
             {
-                var listaStworow = new String("");
-                foreach (Creature creature in listOfCreaturesInPoint)
-                {
-                    var creatureName = creature.Name;
-                    listaStworow += creatureName + ", ";
-                }
+                //var listaStworow = new String("");
+                //foreach (IMappable mappable in listOfCreaturesInPoint)
+                //{
+                //    var creatureName = mappable.Name;
+                //    listaStworow += creatureName + ", ";
+                //}
                 //return $"The creatures in point {point} are as follows: {listaStworow}";
                 return listOfCreaturesInPoint;
             }

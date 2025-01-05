@@ -16,13 +16,25 @@ internal class Program
         Console.OutputEncoding = Encoding.UTF8;
         Console.WriteLine("SIMULATION!\n");
 
-        SmallSquareMap map = new(5);
-        List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor")];
-        List<Simulator.Point> points = [new(2, 2), new(3, 1)];
-        string moves = "dlrludl";
+        SmallTorusMap map = new(8, 6);
+        List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor"),
+            new Animals() { Description = "Rabbits" }, new Birds() { Description = "Eagles"}, new Birds() {Description = "Ostriches", CanFly = false}];
+        List<Simulator.Point> points = [new(2, 2), new(3, 1), new(5, 5), new(7, 3), new(0, 4)];
+        string moves = "dlrludluddlrulr";
 
         Simulation simulation = new(map, creatures, points, moves);
         MapVisulizer mapVisualizer = new(simulation.Map);
+
+
+
+        //SmallSquareMap map = new(5);
+        //List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor")];
+        //List<Simulator.Point> points = [new(2, 2), new(3, 1)];
+        //string moves = "dlrludl";
+
+        //Simulation simulation = new(map, creatures, points, moves);
+        //MapVisulizer mapVisualizer = new(simulation.Map);
+
 
         Console.WriteLine("Created Creatures in map:");
         foreach (IMappable creature in creatures)
