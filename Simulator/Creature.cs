@@ -7,11 +7,12 @@ using Simulator.Maps;
 
 namespace Simulator;
 
-public abstract class Creature
+public abstract class Creature : IMappable
 {
     public Map? Map { get; set; }  
     
     public Point Position { get; set; }
+
 
     public void InitMapAndPosition(Map map, Point position, bool requestFromMap = false)
     {
@@ -89,7 +90,7 @@ public abstract class Creature
         }
     }
 
-    public string Go(Direction direction) //Metoda GO na pojedynczy ruch stwora
+    public string Go(Direction direction)  //Metoda GO na pojedynczy ruch stwora
     {
         if (Map != null)
         {
@@ -98,22 +99,22 @@ public abstract class Creature
         return $"{direction.ToString().ToLower()}"; //konwersja na string i ma małe litery
     }
 
-    public string[] Go(Direction[] directions) //Metoda GO na tablicę ruchów 
-    {
-        string[] goTable = new string[directions.Length];
-        for (int i = 0; i < directions.Length; i++)
-        {
-            goTable[i] = Go(directions[i]);
-        }
-        return goTable;
-    }
+    //public string[] Go(Direction[] directions) //Metoda GO na tablicę ruchów 
+    //{
+    //    string[] goTable = new string[directions.Length];
+    //    for (int i = 0; i < directions.Length; i++)
+    //    {
+    //        goTable[i] = Go(directions[i]);
+    //    }
+    //    return goTable;
+    //}
 
-    public string[] Go(string directionInputString) //Metoda GO parsująca string na tabelicę ruchów
-    {
-        Direction[] directions = DirectionParser.Parse(directionInputString).ToArray();
-        //string[] stringGoTable = Go(directions); //wejsciem jest tablica kierunków
-        return Go(directions);  
-    }
+    //public string[] Go(string directionInputString) //Metoda GO parsująca string na tabelicę ruchów
+    //{
+    //    Direction[] directions = DirectionParser.Parse(directionInputString).ToArray();
+    //    //string[] stringGoTable = Go(directions); //wejsciem jest tablica kierunków
+    //    return Go(directions);  
+    //}
     public override string ToString()
     {
         return $"{GetType().Name.ToUpper()}: {Name} [{Level}]{Info}";

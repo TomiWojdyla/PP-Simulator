@@ -114,7 +114,7 @@ public class MapVisualizer
                 this.dataRows[y] = Box.Vertical.ToString();
                 for (int x = 0; x < Map.SizeX; x++)
                 {
-                    List<Creature> creaturesInPoint = this.Map.At(x, y);
+                    List<IMappable> creaturesInPoint = this.Map.At(x, y);
                     if (creaturesInPoint == null || creaturesInPoint.Count == 0)
                     {
                         dataRows[y] += " ";

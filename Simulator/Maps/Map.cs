@@ -10,7 +10,7 @@ namespace Simulator.Maps;
 /// <summary>
 /// Map of points.
 /// </summary>
-public abstract class Map
+public abstract class Map 
 {
     /// <summary>
     /// Horizontal map size.
@@ -66,20 +66,20 @@ public abstract class Map
     /// <returns>Next point.</returns>
     public abstract Point NextDiagonal(Point p, Direction d);
 
-    public abstract void Add(Creature creature, Point point);
+    public abstract void Add(IMappable mappable, Point point);
 
 
-    public abstract void Remove(Creature creature, Point point);
+    public abstract void Remove(IMappable mappable, Point point);
  
 
-    public void Move(Creature creature, Point startPoint, Point endPoint)
+    public void Move(IMappable mappable, Point startPoint, Point endPoint)
     {
-        Remove(creature, startPoint); //jezeli stwora nie ma w tym punkcie wystopowac Adda
-        Add(creature, endPoint);
+        Remove(mappable, startPoint); //jezeli stwora nie ma w tym punkcie wystopowac Adda
+        Add(mappable, endPoint);
         //return $"Przesunalem {creature} stad {startPoint} tutaj {endPoint}";
     }
 
-    public abstract List<Creature> At(int x, int y); 
+    public abstract List<IMappable> At(int x, int y); 
 
-    public abstract List<Creature> At(Point point);
+    public abstract List<IMappable> At(Point point);
 }

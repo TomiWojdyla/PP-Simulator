@@ -28,7 +28,7 @@ public class Simulation
     /// <summary>
     /// Creatures moving on the map.
     /// </summary>
-    public List<Creature> Creatures { get; }
+    public List<IMappable> Creatures { get; }
 
     /// <summary>
     /// Starting positions of creatures.
@@ -52,7 +52,7 @@ public class Simulation
     /// <summary>
     /// Creature which will be moving current turn.
     /// </summary>
-    public Creature CurrentCreature 
+    public IMappable CurrentCreature 
     {
         get /* implement getter only */
         {
@@ -87,29 +87,29 @@ private List<Direction> _directionListForSimulation // List of parsed directions
     /// if number of creatures differs from 
     /// number of starting positions.
     /// </summary>
-    public Simulation(Map map, List<Creature> creatures, List<Point> positions, string moves)
+    public Simulation(Map map, List<IMappable> mappables, List<Point> positions, string moves)
     { 
         Map = map;
-        if (creatures.Count == 0)
+        if (mappables.Count == 0)
         {
-            throw new ArgumentException("List of Creatures cannot be empty", nameof(creatures));
+            throw new ArgumentException("List of Creatures cannot be empty", nameof(mappables));
         }
-        else if (creatures.Count != positions.Count)
+        else if (mappables.Count != positions.Count)
         {
             throw new ArgumentException("Number of creatures and their starting positions must match", nameof(positions));
         }
         else
         {
-            Creatures = creatures;
+            Creatures = mappables;
             Positions = positions;
             Moves = moves;
             _currentTurnIndex = 0;
             _numberOfTurns = _directionListForSimulation.Count;
             // Inicjowanie stworów na mapie
             int i = 0; // Positions iterator
-            foreach (Creature creature in creatures)
+            foreach (IMappable mappable in Creatures)
             {
-                creature.InitMapAndPosition(Map, Positions[i]);
+                mappable.InitMapAndPosition(Map, Positions[i]);
                 i++;
             }
         }
