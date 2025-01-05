@@ -23,7 +23,7 @@ public abstract class SmallMap : Map
             throw new ArgumentOutOfRangeException(nameof(sizeY), "Map size cannot be larger than 20"); //wyjątek -> wymiar mapy nie pasuje do założeń
         }
 
-        _fields = new List<Creature>?[sizeX - 1, sizeY - 1];
+        _fields = new List<Creature>?[sizeX, sizeY];
     }
 
     public override void Add(Creature creature, Point point)
@@ -38,7 +38,7 @@ public abstract class SmallMap : Map
             _fields[point.X, point.Y] = lista;
         }
         creature.InitMapAndPosition(this, point, true);
-        Console.WriteLine($"ADD Function Dodałem {creature} w punkcie {point}");
+        //Console.WriteLine($"ADD Function Dodałem {creature} w punkcie {point}");
     }
 
     public override void Remove(Creature creature, Point point)
@@ -46,20 +46,21 @@ public abstract class SmallMap : Map
         //dodac sprawdzenie czy stwór jest w tym punkcie
         _fields[point.X,point.Y].Remove(creature);
         creature.RemoveFromMap();
-        Console.WriteLine($"Remove Function: Usunąłem {creature} z punktu {point}");    
+        //Console.WriteLine($"Remove Function: Usunąłem {creature} z punktu {point}");    
     }
 
-    public override string At(int x, int y)
+    public override List<Creature> At(int x, int y)
     {
         var point = new Point(x, y);
         return this.At(point);
     }
 
-    public override string At(Point point)
+    public override List<Creature> At(Point point)
     {
         if (this.Exist(point) == false)
         {
-            return $"Point {point} does not belong to the map";
+            //return $"Point {point} does not belong to the map";
+            return new List<Creature> { };
         }
         else
         {
@@ -72,11 +73,13 @@ public abstract class SmallMap : Map
                     var creatureName = creature.Name;
                     listaStworow += creatureName + ", ";
                 }
-                return $"The creatures in point {point} are as follows: {listaStworow}";
+                //return $"The creatures in point {point} are as follows: {listaStworow}";
+                return listOfCreaturesInPoint;
             }
             else
             {
-                return $"In the indicated Point there are no creatures";
+                //return $"In the indicated Point there are no creatures";
+                return new List<Creature> { };
             }
         }
     }

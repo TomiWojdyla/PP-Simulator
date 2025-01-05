@@ -72,14 +72,14 @@ public abstract class Map
     public abstract void Remove(Creature creature, Point point);
  
 
-    public string Move(Creature creature, Point startPoint, Point endPoint)
+    public void Move(Creature creature, Point startPoint, Point endPoint)
     {
         Remove(creature, startPoint); //jezeli stwora nie ma w tym punkcie wystopowac Adda
         Add(creature, endPoint);
-        return $"Przesunalem {creature} stad {startPoint} tutaj {endPoint}";
+        //return $"Przesunalem {creature} stad {startPoint} tutaj {endPoint}";
     }
 
-    public abstract string At(int x, int y); 
+    public abstract List<Creature> At(int x, int y); 
 
-    public abstract string At(Point point);
+    public abstract List<Creature> At(Point point);
 }

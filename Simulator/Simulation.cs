@@ -9,10 +9,16 @@ namespace Simulator;
 
 public class Simulation
 {
-    private int _currentTurnNumber; // Current turn number - initiating with 0
+    private int _currentTurnIndex; // Current turn number - initiating with 0 -> mozna rozdzielić na Turn Index i turn number
     private int _numberOfTurns; // Number of turns based on Moves string
-    private int _currentCreatureNumber; // Curent Creature number - initiating with 0
-    private int _numberOfCreatures; // Length of Creatures string
+
+    public int CurrentTurnNumber
+    {
+        get 
+        { 
+            return _currentTurnIndex + 1; 
+        }
+    }
     
     /// <summary>
     /// Simulation's map.
@@ -50,7 +56,7 @@ public class Simulation
     {
         get /* implement getter only */
         {
-            return Creatures[_currentTurnNumber];
+            return Creatures[_currentTurnIndex % Creatures.Count];
         }
     }
 
@@ -65,12 +71,12 @@ private List<Direction> _directionListForSimulation // List of parsed directions
 
     /// <summary>
     /// Lowercase name of direction which will be used in current turn.
-    /// </summary>
+    /// </summary> 
     public string CurrentMoveName 
     {
         get /* implement getter only */
         {
-            return $"{_directionListForSimulation[_currentTurnNumber].ToString().ToLower()}";
+            return $"{_directionListForSimulation[_currentTurnIndex].ToString().ToLower()}";
         }
     }
 
@@ -95,10 +101,10 @@ private List<Direction> _directionListForSimulation // List of parsed directions
         else
         {
             Creatures = creatures;
-            _numberOfCreatures = creatures.Count;
             Positions = positions;
             Moves = moves;
-            _currentTurnNumber = 0;
+            _currentTurnIndex = 0;
+            _numberOfTurns = _directionListForSimulation.Count;
             // Inicjowanie stworów na mapie
             int i = 0; // Positions iterator
             foreach (Creature creature in creatures)
@@ -115,9 +121,11 @@ private List<Direction> _directionListForSimulation // List of parsed directions
     /// </summary>
     public void Turn() 
     {
-        //var CurrentDirection = _directionListForSimulation[_currentTurnNumber];
-        //Map.Move(CurrentCreature, CurrentCreature.Position, CurrentCreature.Go(CurrentDirection));
-        CurrentCreature.Go(_directionListForSimulation[_currentTurnNumber]);
-        _currentTurnNumber++; //co sie ma stać gdy ilość turn jest wyczerpana?
+        CurrentCreature.Go(_directionListForSimulation[_currentTurnIndex]);
+        _currentTurnIndex++; 
+        if (_currentTurnIndex == _numberOfTurns)
+        {
+            this.Finished = true;
+        }
     }
 }

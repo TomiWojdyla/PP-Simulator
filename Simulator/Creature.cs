@@ -21,14 +21,17 @@ public abstract class Creature
         {
             Map.Add(this, Position);
         }
-            Console.WriteLine($"InitMapANd POsition: Dodalem stwora na mapie {map} w punkcie {position}");
+            //Console.WriteLine($"InitMapANd POsition: Dodalem stwora na mapie {map} w punkcie {position}");
     }
 
     public void RemoveFromMap()
     {
         Map = null;
     }
-    
+
+    public abstract char MapSymbol { get; } // For SimConsole
+
+
     //Pola Prywatne
     private string _name = "Unknown"; //konwencja nazywania pól prywatnych _camelCase
     private int _level;

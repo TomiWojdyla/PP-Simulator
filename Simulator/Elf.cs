@@ -13,6 +13,7 @@ public class Elf : Creature
     private int _singCounter = 0; // licznik śpiewu: początkowo = 0
     private int _agilityBySingModifier = 3; // modyfikator: co ile śpiewów rośnie agility
 
+
     //Właściwości + gettery/settery
     public override int Power
     {
@@ -38,6 +39,9 @@ public class Elf : Creature
             _agility = Validator.Limiter(value, 0, 10);
         }
     }
+
+    public override char MapSymbol => 'E'; // for SimConsole
+
     public void Sing()
     {
         _singCounter++; //licznik śpiewu +1
