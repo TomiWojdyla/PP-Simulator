@@ -13,6 +13,8 @@ public abstract class Creature : IMappable
     
     public Point Position { get; set; }
 
+    public bool IsLost { get; set; } = false;
+
 
     public void InitMapAndPosition(Map map, Point position, bool requestFromMap = false)
     {

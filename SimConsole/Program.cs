@@ -17,12 +17,20 @@ internal class Program
         Console.WriteLine("SIMULATION!\n");
 
         SmallTorusMap map = new(8, 6);
-        List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor"),
-            new Animals() { Description = "Rabbits" }, new Birds() { Description = "Eagles"}, new Birds() {Description = "Ostriches", CanFly = false}];
-        List<Simulator.Point> points = [new(2, 2), new(3, 1), new(5, 5), new(7, 3), new(0, 4)];
-        string moves = "dlrludluddlrulr";
+        //List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor"),
+        //    new Animals() { Description = "Rabbits" }, new Birds() { Description = "Eagles"}, new Birds() {Description = "Ostriches", CanFly = false}];
+        //List<Simulator.Point> points = [new(2, 2), new(3, 1), new(5, 5), new(7, 3), new(0, 4)];
 
-        Simulation simulation = new(map, creatures, points, moves);
+        List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor"), new Animals() { Description = "Rabbits" }];
+        List<Simulator.Point> points = [new Simulator.Point(2,1), new Simulator.Point(2,3), new Simulator.Point(4,4)];
+        List<StaticObstacle> obstacles = [new StaticObstacle("Mountain", NaturalElement.Earth), new StaticObstacle("River", NaturalElement.Water), 
+            new StaticObstacle("River", NaturalElement.Water), new StaticObstacle("River", NaturalElement.Water),new StaticObstacle("Mist", NaturalElement.Air)];
+        List<Simulator.Point> obstaclePoints = [new(2, 2), new(3,5), new(3,4), new(3,3), new(5,4)];
+
+        //string moves = "dlrludluddlrulr";
+        string moves = "rdlrrruuuurrr";
+
+        Simulation simulation = new(map, creatures, points, obstacles, obstaclePoints, moves);
         MapVisulizer mapVisualizer = new(simulation.Map);
 
 
@@ -56,8 +64,10 @@ internal class Program
             Console.WriteLine(":");
             simulation.Turn();
             mapVisualizer.Draw();
+            if (simulation.simulationMessage) Console.WriteLine(simulation.endingMessage);
         }
         Console.WriteLine("End of simulation!");
+
 
 
         //SmallSquareMap map = new(5);

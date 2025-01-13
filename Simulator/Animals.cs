@@ -14,6 +14,8 @@ public class Animals : IMappable
     //Pola Prywatne
     private string _description = "Unknown"; //konwencja nazywania pól prywatnych _camelCase
 
+    public bool IsLost {  get; set; } = false;  
+
     //Właściwości + gettery/settery
     public required string Description
     {
